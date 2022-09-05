@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myvolemptydir
+spec:
+  containers:
+    - name: c1
+      image: centos
+      command: ["/bin/bash", "-c", "sleep 15000"]
+      volumeMounts: # Mount definition inside the container
+        - name: xchange
+          mountPath: "/tmp/xchange"               #volume is mount in container c1 at this path
+    - name: c2
+      image: centos
+      command: ["/bin/bash", "-c", "sleep 10000"]
+      volumeMounts:
+        - name: xchange                           #name should be same as the name in volumes:
+          mountPath: "/tmp/data"                  #volume is mount in container c2 at this path
+  volumes:                                        #this dir is created in pod
+    - name: xchange
+      emptyDir: {}

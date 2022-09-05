@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myvolhostpath
+spec:
+  containers:
+    - image: centos
+      name: testc
+      command: ["/bin/bash", "-c", "sleep 15000"]
+      volumeMounts:
+        - mountPath: /tmp/vol1 #here enter path in container
+          name: testvolume
+  volumes:
+    - name: testvolume
+      hostPath:
+        path: /home/nirbhay/Desktop/MyFolder/Projects/K8S_Minikube #here enter path of host machin to mount

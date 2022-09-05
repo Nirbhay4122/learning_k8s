@@ -1,0 +1,102 @@
+Install MINIKUBE
+//>>
+
+minikube is a tool which provide facility to run master and node into a same machine.
+which is used for learning nad practice purposes.
+
+Basic requironment to install:
+
+-2 CPU
+-To check
+>>>nproc
+
+-2GB RAM
+-To check
+>>>free --mega -h
+or,
+>>>free -m
+
+-20GB ROM (storage)
+-To check
+>>>df / -h
+
+-Docker or any other container tool is installed
+
+>>//
+
+
+1--
+-To know how many cpu (core) in your pc (ubuntu).
+
+Commands:-
+
+>>>nproc
+
+done;
+
+2--
+-Now install MINIKUBE on ubuntu 20.04
+
+Commands:-
+
+>>>curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+>>>sudo dpkg -i minikube_latest_amd64.deb
+>>>minikube start
+
+
+Note :>>
+After executing minikube start command it will started to download the base image of k8s which is arround (400MB) so make sure you
+have the enough data.
+
+done;
+
+3--
+-After instalation of minikube you have to install one more tool known as kubectl tool.
+-kubectl tool is use to control and manage k8s clusters through command line, So to install this tool you have to follow below steps.
+
+Install Kubectl Tool:
+Commands:-
+
+step-1
+-Download the kubectl tool:
+>>>curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+step-2
+-Download the kubectl checksum file:
+>>>curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+
+step-3
+-Validate the kubectl binary against the checksum file:
+>>>echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+
+step-4
+-Install kubectl
+>>>sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+step-5
+-Check version to insure kubectl is installed properly
+>>>kubectl version --client
+
+or, For detailed view
+
+>>>kubectl version --client --output=yaml
+
+done;
+
+
+4--
+-Start minikube dashboard
+>>>minikube dashoard
+
+5--
+-Get details of Nodes
+>>>kubectl get nodes
+
+6--
+-Get every kinds of details of a specific node
+>>>kubectl describe nodes <node_name, or node_ip>
+
+7--
+-to check details about pods
+>>>kubectl get pods
+

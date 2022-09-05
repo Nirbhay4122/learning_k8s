@@ -1,0 +1,106 @@
+Everything about pods--
+
+1--
+-To check details about pods:
+>>>kubectl get pods
+
+2--
+-To create pods via .yaml, or .yml file:
+>>>kubectl apply -f <manifest_name.yml>
+
+3--
+-To check Where pods are running:
+>>>kubectl describe pod wide
+
+4--
+-Describe details about pod:
+>>>kubectl describe pod <pod_name>
+
+5--
+-To intract with pod:
+-if there is running single container in the pod
+>>>kubectl exec -it <pod_name> /bin/bash
+
+-if there is running multiple container in the single pod
+>>>kubectl exec -it <pod_name> -c <container_name> /bin/bash
+
+6--
+-To check whats running inside the pod (if there is runnung only one container in the pod)
+>>>kubectl logs -f <pod_name>
+
+-If multiple container is running in the pod:
+>>>kubectl logs -f <pod_name> -c <container_name>
+
+7--
+-To delete a pod
+>>>kubectl delete pod <pod_name>
+
+or,
+
+>>>kubectl delete -f <file_name.yml>
+
+8--
+-List all pods in ps output format
+>>>kubectl get pods
+
+9--
+-List all pods in ps output format with more information (such as node name)
+>>>kubectl get pods -o wide
+
+10--
+-List a single replication controller with specified NAME in ps output format
+>>>kubectl get replicationcontroller web
+
+11--
+-List deployments in JSON output format, in the "v1" version of the "apps" API group
+>>>kubectl get deployments.v1.apps -o json
+
+12--
+-List a single pod in JSON output format
+>>>kubectl get -o json pod web-pod-13je7
+
+13--
+-List a pod identified by type and name specified in "pod.yaml" in JSON output format
+>>>kubectl get -f pod.yaml -o json
+
+14--
+-List resources from a directory with kustomization.yaml - e.g. dir/kustomization.yaml
+>>>kubectl get -k dir/
+
+15--
+-Return only the phase value of the specified pod
+>>>kubectl get -o template pod/web-pod-13je7 --template={{.status.phase}}
+
+16--
+-List resource information in custom columns
+>>>kubectl get pod test-pod -o custom-columns=CONTAINER:.spec.containers[0].name,IMAGE:.spec.containers[0].image
+
+17--
+-List all replication controllers and services together in ps output format
+>>>kubectl get rc,services
+
+18--
+-List one or more resources by their type and names
+>>>kubectl get rc/web service/frontend pods/web-pod-13je7
+
+19--
+-List status subresource for a single pod.
+>>>kubectl get pod web-pod-13je7 --subresource status
+
+20--
+-Create label on any pod:
+>>>kubectl label pod <pod_name> (put label key=value)
+
+21--
+-To see the labels on pods:
+>>>kubectl get pods --show-labels
+
+22--
+-To find pods via label:
+>>>kubectl get pods -l (<label_name> key=value)
+Example--
+>>>kubectl get pods -l myname=nirbhay
+
+23--
+-Delete pods via label:
+>>>kubectl delete pod -l <key=value>
